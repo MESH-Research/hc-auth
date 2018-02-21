@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once dirname( __FILE__ ) . '/' . 'functions.inc.php';
 
 /**
- * Provides functiions that accesses the MLA API to retreive
+ * Provides functions that accesses the MLA API to retreive
  * information about MLA members.
  *
  * @package MLA_Hcommons
