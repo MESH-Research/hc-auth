@@ -14,4 +14,4 @@
 
 require_once trailingslashit( __DIR__ ) . 'includes/class.mla-hcommons.php';
 
-add_action( 'plugins_loaded', array( 'Mla_Hcommons', 'init' ));
+add_action('plugins_loaded', array('MLA_Hcommons', 'singleton'));
