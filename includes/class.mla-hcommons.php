@@ -37,7 +37,7 @@ class MLA_Hcommons {
 	/**
 	 * MLA API parameters
 	 *
-	 * @var string
+	 * @var array
 	 */
 	private $api_parameters = array();
 
@@ -328,7 +328,7 @@ class MLA_Hcommons {
 
 		$mla_member_data = $this->lookup_mla_member_data( $user->ID );
 
-		if ( $mla_member_data['mla_username'] !== $user->user_login ) {
+		if ( !empty($mla_member_data['mla_username']) && $mla_member_data['mla_username'] !== $user->user_login ) {
 			echo sprintf( '<div id="changeUsername"><p><a href="." class="hc-username" data-username="%s" data-mla_user_id="%s" data-hc_user_id="%s">Set your MLA.org username to your HC username.</a></p></div><br>', $user->user_login, $mla_member_data['mla_member_id'], $user->ID );
 	    }
 	}
@@ -356,8 +356,11 @@ class MLA_Hcommons {
 		add_action( 'init', array( $this, 'register_society_member_id_taxonomy' ) );
 		add_action( 'wpmn_register_taxonomies', array( $this, 'register_society_member_id_taxonomy' ) );
 
-		add_action( 'wp_ajax_change_username', array( $this, 'change_username' ) );
-		add_action( 'bp_before_member_settings_template', array( $this, 'mla_hcommons_bp_before_member_settings_template' ) );
+		if ( class_exists( 'Humanities_Commons' ) && 'mla' === Humanities_Commons::$society_id ) {
+
+			add_action( 'wp_ajax_change_username', array( $this, 'change_username' ) );
+			add_action( 'bp_before_member_settings_template', array( $this, 'mla_hcommons_bp_before_member_settings_template' ) );
+	    }
 
 		wp_enqueue_script( 'hc-auth-js',plugins_url( '/js/hc-auth.js',__FILE__ ), array( 'jquery' ), '1.0', true );
 		wp_enqueue_style( 'hc-auth-css',plugins_url( '/css/hc-auth.css',__FILE__ ), array(), '1.0' );
