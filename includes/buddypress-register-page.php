@@ -15,10 +15,11 @@
  */
 function hc_custom_bp_get_signup_page( $register_url ) {
 	$register_url  = '/begin/';
+
 	return $register_url;
 };
 
-add_filter( 'bp_get_signup_page', 'hc_custom_bp_get_signup_page' );
+add_filter( 'bp_get_signup_page', 'hc_custom_bp_get_signup_page', 11 );
 
 /**
  * Add shortcode to get the enrollment url
